@@ -276,7 +276,31 @@ namespace KthToLast
         // Incomplete
         public void RemoveAt(int index)
         {
-            
+            var currentNode = Head;
+            int currentIndex = 0;
+
+            while (currentNode != null)
+            {
+                // find the node at index - 1
+                if (currentIndex == index - 1)
+                {
+                    // insert the new node
+                    var newNode = Head;
+                    newNode.Next = currentNode.Next;
+                    currentNode.Next = newNode;
+
+                    if (currentNode == Tail)
+                    {
+                        Tail = newNode;
+                    }
+
+                    length--;
+                }
+
+                currentNode = currentNode.Next;
+                currentIndex--;
+            }
+
         }
 
         // Incomplete
@@ -307,7 +331,14 @@ namespace KthToLast
         // TODO 
         public T KthToLast(int k)
         {
-            return default(T);
+            var currentNode = Tail;
+
+            for (int i = 0; i < k; i++)
+            {
+                currentNode = currentNode.Next;
+            }
+
+            return currentNode.Data;
         }
     }
 }
